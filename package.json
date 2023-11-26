@@ -1,6 +1,6 @@
 {
   "name": "wk-csv-json",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Convert an uploaded CSV file to JSON",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

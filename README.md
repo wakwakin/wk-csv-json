@@ -19,18 +19,22 @@ fileChange(event) {
   })
 }
 ```
+
 ```html
 // on your component.html
 
 <input type="file" (change)="fileChange($event)">
 ```
+
 Sample CSV file
+
 | id  | first name | last name | email |
 | ------------- | ------------- | ------------- | ------------- |
 | 1  | Letizia | Dominy | Letizia.Dominy@yopmail.com |
 | 2  | Wilma | Therine | Wilma.Therine@yopmail.com |
 
 Sample Output
+
 ```json
 [
   {

@@ -1,11 +1,17 @@
 import { ICSV } from "./interface";
 
-export function inputToJSON(target: FileList, headers: boolean) {
+export function inputToJSON(target: FileList, headers: boolean = true) {
   let json = promise(target, headers).then((value: any) => value);
   return json;
 }
 
-const promise = (target: FileList, headers: boolean = true) => {
+export function csvToJSON(csv: string, headers: boolean = true) {
+  let csvArray: ICSV = [];
+  conversion(csv, headers, csvArray, false)
+  return csvArray
+}
+
+const promise = (target: FileList, headers: boolean) => {
   return new Promise((resolve, reject) => {
     const fileCount = target.length;
     let csvArray: ICSV = [];
@@ -24,17 +30,7 @@ const promise = (target: FileList, headers: boolean = true) => {
       const fr = new FileReader();
       fr.onload = (d) => {
         if (d.target && d.target.result) {
-          const data = d.target.result.toString().split("\r\n");
-          let header = data[0].split(",");
-
-          for (let j = 1; j < data.length; j++) {
-            const ch = data[j].split(",");
-            let csvData: { [k: string]: any } = {};
-            for (let k = 0; k < header.length; k++) {
-              csvData[headers ? header[k].replace(" ", "") : 'value'] = ch[k];
-            }
-            csvArray.push(csvData);
-          }
+          conversion(d.target.result, headers, csvArray, true)
 
           resolve({
             data: csvArray,
@@ -62,6 +58,23 @@ const promise = (target: FileList, headers: boolean = true) => {
     }
   });
 };
+
+function conversion(csv: string | ArrayBuffer, headers: boolean, arrayHolder: any, isInput: boolean) {
+  const data = isInput ? csv.toString().split("\r\n") : csv.toString().split("\n");
+  let header = data[0].split(",");
+
+  for (let j = 1; j < data.length; j++) {
+    const ch = data[j].split(",");
+    let csvData: { [k: string]: any } = {};
+    for (let k = 0; k < header.length; k++) {
+      console.log(ch);
+      csvData[headers ? header[k].replace(" ", "") : "value"] = headers
+        ? ch[k]
+        : ch;
+    }
+    arrayHolder.push(csvData);
+  }
+}
 
 function csvCheck(file: { type: string }) {
   return file.type == "text/csv";

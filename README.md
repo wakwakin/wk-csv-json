@@ -81,8 +81,6 @@ csvToJSON method
 ```typescript
 // on your component.ts
 
-import { csvToJSON } from 'wk-csv-json'
-
 this.csv = csvToJSON(
   "id,name,email\n1,Letizia Dominy,Letizia.Dominy@yopmail.com"
 );
@@ -133,7 +131,7 @@ Output (Headers false)
 | target     | String  |         | The CSV string to be converted to JSON |
 | headers    | Boolean | true    | Use the header as key                  |
 
-if headers parameters
+if **headers** parameter is **true**, it uses the first line in CSV as headers.
 
 ## Future
 

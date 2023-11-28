@@ -71,6 +71,7 @@ Sample Output (Headers false)
 | target  | FileList | | The CSV file to be converted to JSON |
 | headers  | Boolean | true | Use the header as key |
 
+
 ```typescript
   this.csv = csvToJSON("id,name,email\n1,Letizia Dominy,Letizia.Dominy@yopmail.com")
 ```
@@ -104,6 +105,6 @@ Output (Headers false)
 | headers  | Boolean | true | Use the header as key |
 
 ## Future
-~~Convert plain CSV (Not from file) to JSON~~ ** Added **
+~~Convert plain CSV (Not from file) to JSON~~ *** Added ***
 
 Convert JSON to CSV

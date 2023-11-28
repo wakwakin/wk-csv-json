@@ -1,6 +1,6 @@
 {
   "name": "wk-csv-json",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Convert an uploaded CSV file to JSON and CSV string",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -25,11 +25,12 @@
   },
   "keywords": [
     "typescript",
+    "input file",
+    "upload",
     "csv",
+    "csv to json",
     "json",
-    "convert",
-    "promise",
-    "upload"
+    "convert"
   ],
   "repository": {
     "type": "git",

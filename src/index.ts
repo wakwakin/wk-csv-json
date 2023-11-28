@@ -71,19 +71,24 @@ function conversion(
   const data = isInput
     ? csv.toString().split("\r\n")
     : csv.toString().split("\n");
-  let header = data[0].split(",");
 
-  for (let j = 1; j < data.length; j++) {
-    const ch = data[j].split(",");
-    let csvData: { [k: string]: any } = {};
-    if (headers) {
+  if (headers) {
+    let header = data[0].split(",");
+    for (let j = 1; j < data.length; j++) {
+      const ch = data[j].split(",");
+      let csvData: { [k: string]: any } = {};
       for (let k = 0; k < header.length; k++) {
         csvData[header[k].replace(" ", "")] = ch[k];
       }
-    } else {
-      csvData.value = ch;
+      arrayHolder.push(csvData);
     }
-    arrayHolder.push(csvData);
+  } else {
+    for (let j = 0; j < data.length; j++) {
+      const ch = data[j].split(",");
+      let csvData: { [k: string]: any } = {};
+      csvData.value = ch;
+      arrayHolder.push(csvData);
+    }
   }
 }
 

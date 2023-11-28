@@ -4,9 +4,9 @@
   npm install wk-csv-json
 ```
 
-## Example
+## Usage
 
-Usage of inputToJSON method
+inputToJSON method
 ```typescript
 // on your component.ts
 
@@ -64,6 +64,9 @@ Sample Output (Headers false)
 {
   data: [
     {
+      "value": ["id", "first name", "last name", "email"]
+    },
+    {
       "value": [1, "Letizia", "Dominy", "Letizia.Dominy@yopmail.com"]
     },
     {
@@ -74,9 +77,11 @@ Sample Output (Headers false)
 }
 ```
 
-Usage of csvToJSON method
+csvToJSON method
 ```typescript
 // on your component.ts
+
+import { csvToJSON } from 'wk-csv-json'
 
 this.csv = csvToJSON(
   "id,name,email\n1,Letizia Dominy,Letizia.Dominy@yopmail.com"
@@ -104,6 +109,9 @@ Output (Headers false)
 {
   data: [
     {
+      "value": ["id", "name", "email"]
+    },
+    {
       "value": [1, "Letizia Dominy", "Letizia.Dominy@yopmail.com"]
     }
   ],
@@ -124,6 +132,8 @@ Output (Headers false)
 | ---------- | ------- | ------- | -------------------------------------- |
 | target     | String  |         | The CSV string to be converted to JSON |
 | headers    | Boolean | true    | Use the header as key                  |
+
+if headers parameters
 
 ## Future
 

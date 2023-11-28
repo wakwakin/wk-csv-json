@@ -33,7 +33,7 @@ Sample CSV file
 | 1  | Letizia | Dominy | Letizia.Dominy@yopmail.com |
 | 2  | Wilma | Therine | Wilma.Therine@yopmail.com |
 
-Sample Output
+Sample Output (Headers true)
 
 ```json
 [
@@ -52,13 +52,58 @@ Sample Output
 ]
 ```
 
+Sample Output (Headers false)
+
+```json
+[
+  {
+    "value": [1, "Letizia", "Dominy", "Letizia.Dominy@yopmail.com"]
+  },
+  {
+    "value": [2, "Wilma", "Therine", "Wilma.Therine@yopmail.com"]
+  }
+]
+```
+
 ## inputToJSON(target, headers)
 | Parameters  | Type | Default | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | target  | FileList | | The CSV file to be converted to JSON |
 | headers  | Boolean | true | Use the header as key |
 
+```typescript
+  this.csv = csvToJSON("id,name,email\n1,Letizia Dominy,Letizia.Dominy@yopmail.com")
+```
+
+Output (Headers true)
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Letizia Dominy",
+    "email": "Letizia.Dominy@yopmail.com"
+  }
+]
+```
+
+Output (Headers false)
+
+```json
+[
+  {
+    "value": [1, "Letizia Dominy", "Letizia.Dominy@yopmail.com"]
+  }
+]
+```
+
+## csvToJSON(target, headers)
+| Parameters  | Type | Default | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| target  | String | | The CSV string to be converted to JSON |
+| headers  | Boolean | true | Use the header as key |
+
 ## Future
-Convert plain CSV (Not from file) to JSON
+~~Convert plain CSV (Not from file) to JSON~~ ** Added **
 
 Convert JSON to CSV

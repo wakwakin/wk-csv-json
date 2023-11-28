@@ -1,9 +1,12 @@
 ## Installation
+
 ```bash
   npm install wk-csv-json
 ```
 
 ## Example
+
+Usage of inputToJSON method
 ```typescript
 // on your component.ts
 
@@ -21,90 +24,109 @@ fileChange(event) {
 ```
 
 ```html
-// on your component.html
+<!-- on your component.html -->
 
-<input type="file" (change)="fileChange($event)">
+<input type="file" (change)="fileChange($event)" />
 ```
 
 Sample CSV file
 
-| id  | first name | last name | email |
-| ------------- | ------------- | ------------- | ------------- |
-| 1  | Letizia | Dominy | Letizia.Dominy@yopmail.com |
-| 2  | Wilma | Therine | Wilma.Therine@yopmail.com |
+| id  | first name | last name | email                      |
+| --- | ---------- | --------- | -------------------------- |
+| 1   | Letizia    | Dominy    | Letizia.Dominy@yopmail.com |
+| 2   | Wilma      | Therine   | Wilma.Therine@yopmail.com  |
 
 Sample Output (Headers true)
 
-```json
-[
-  {
-    "id": 1,
-    "firstname": "Letizia",
-    "lastname": "Dominy",
-    "email": "Letizia.Dominy@yopmail.com"
-  },
-  {
-    "id": 2,
-    "firstname": "Wilma",
-    "lastname": "Therine",
-    "email": "Wilma.Therine@yopmail.com"
-  }
-]
+```typescript
+{
+  data: [
+    {
+      "id": 1,
+      "firstname": "Letizia",
+      "lastname": "Dominy",
+      "email": "Letizia.Dominy@yopmail.com"
+    },
+    {
+      "id": 2,
+      "firstname": "Wilma",
+      "lastname": "Therine",
+      "email": "Wilma.Therine@yopmail.com"
+    }
+  ],
+  message: "Conversion complete"
+}
 ```
 
 Sample Output (Headers false)
 
-```json
-[
-  {
-    "value": [1, "Letizia", "Dominy", "Letizia.Dominy@yopmail.com"]
-  },
-  {
-    "value": [2, "Wilma", "Therine", "Wilma.Therine@yopmail.com"]
-  }
-]
+```typescript
+{
+  data: [
+    {
+      "value": [1, "Letizia", "Dominy", "Letizia.Dominy@yopmail.com"]
+    },
+    {
+      "value": [2, "Wilma", "Therine", "Wilma.Therine@yopmail.com"]
+    }
+  ],
+  message: "Conversion complete"
+}
 ```
 
-## inputToJSON(target, headers)
-| Parameters  | Type | Default | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| target  | FileList | | The CSV file to be converted to JSON |
-| headers  | Boolean | true | Use the header as key |
-
-
+Usage of csvToJSON method
 ```typescript
-  this.csv = csvToJSON("id,name,email\n1,Letizia Dominy,Letizia.Dominy@yopmail.com")
+// on your component.ts
+
+this.csv = csvToJSON(
+  "id,name,email\n1,Letizia Dominy,Letizia.Dominy@yopmail.com"
+);
 ```
 
 Output (Headers true)
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Letizia Dominy",
-    "email": "Letizia.Dominy@yopmail.com"
-  }
-]
+```typescript
+{
+  data: [
+    {
+      "id": 1,
+      "name": "Letizia Dominy",
+      "email": "Letizia.Dominy@yopmail.com"
+    }
+  ],
+  message: "Conversion complete"
+}
 ```
 
 Output (Headers false)
 
-```json
-[
-  {
-    "value": [1, "Letizia Dominy", "Letizia.Dominy@yopmail.com"]
-  }
-]
+```typescript
+{
+  data: [
+    {
+      "value": [1, "Letizia Dominy", "Letizia.Dominy@yopmail.com"]
+    }
+  ],
+  message: "Conversion complete"
+}
 ```
 
+## inputToJSON(target, headers)
+
+| Parameters | Type     | Default | Description                          |
+| ---------- | -------- | ------- | ------------------------------------ |
+| target     | FileList |         | The CSV file to be converted to JSON |
+| headers    | Boolean  | true    | Use the header as key                |
+
 ## csvToJSON(target, headers)
-| Parameters  | Type | Default | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| target  | String | | The CSV string to be converted to JSON |
-| headers  | Boolean | true | Use the header as key |
+
+| Parameters | Type    | Default | Description                            |
+| ---------- | ------- | ------- | -------------------------------------- |
+| target     | String  |         | The CSV string to be converted to JSON |
+| headers    | Boolean | true    | Use the header as key                  |
 
 ## Future
-~~Convert plain CSV (Not from file) to JSON~~ *** Added ***
+
+~~Convert plain CSV (Not from file) to JSON~~ - Added
 
 Convert JSON to CSV

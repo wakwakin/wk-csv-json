@@ -7,8 +7,11 @@ export function inputToJSON(target: FileList, headers: boolean = true) {
 
 export function csvToJSON(csv: string, headers: boolean = true) {
   let csvArray: ICSV = [];
-  conversion(csv, headers, csvArray, false)
-  return csvArray
+  conversion(csv, headers, csvArray, false);
+  return {
+    data: csvArray,
+    message: "Conversion complete",
+  };
 }
 
 const promise = (target: FileList, headers: boolean) => {
@@ -30,7 +33,7 @@ const promise = (target: FileList, headers: boolean) => {
       const fr = new FileReader();
       fr.onload = (d) => {
         if (d.target && d.target.result) {
-          conversion(d.target.result, headers, csvArray, true)
+          conversion(d.target.result, headers, csvArray, true);
 
           resolve({
             data: csvArray,
@@ -59,18 +62,26 @@ const promise = (target: FileList, headers: boolean) => {
   });
 };
 
-function conversion(csv: string | ArrayBuffer, headers: boolean, arrayHolder: any, isInput: boolean) {
-  const data = isInput ? csv.toString().split("\r\n") : csv.toString().split("\n");
+function conversion(
+  csv: string | ArrayBuffer,
+  headers: boolean,
+  arrayHolder: any,
+  isInput: boolean
+) {
+  const data = isInput
+    ? csv.toString().split("\r\n")
+    : csv.toString().split("\n");
   let header = data[0].split(",");
 
   for (let j = 1; j < data.length; j++) {
     const ch = data[j].split(",");
     let csvData: { [k: string]: any } = {};
-    for (let k = 0; k < header.length; k++) {
-      console.log(ch);
-      csvData[headers ? header[k].replace(" ", "") : "value"] = headers
-        ? ch[k]
-        : ch;
+    if (headers) {
+      for (let k = 0; k < header.length; k++) {
+        csvData[header[k].replace(" ", "")] = ch[k];
+      }
+    } else {
+      csvData.value = ch;
     }
     arrayHolder.push(csvData);
   }
